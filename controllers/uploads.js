@@ -12,11 +12,11 @@ const fileUpload = ( req, res = response ) => {
     const id   = req.params.id;
 
     // Validar tipo
-    const tiposValidos = ['hospitales','medicos','usuarios'];
+    const tiposValidos = ['temas','medicos','usuarios'];
     if ( !tiposValidos.includes(tipo) ){
         return res.status(400).json({
             ok: false,
-            msg: 'No es un médico, usuario u hospital (tipo)'
+            msg: 'No es un médico, usuario u tema (tipo)'
         });
     }
 

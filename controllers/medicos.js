@@ -6,7 +6,7 @@ const getMedicos = async(req, res = response) => {
 
     const medicos = await Medico.find()
                                 .populate('usuario','nombre img')
-                                .populate('hospital','nombre img')
+                                .populate('tema','nombre img')
 
 
     res.json({
@@ -22,7 +22,7 @@ const getMedicoById = async(req, res = response) => {
     try {
         const medico = await Medico.findById(id)
                                     .populate('usuario','nombre img')
-                                    .populate('hospital','nombre img');
+                                    .populate('tema','nombre img');
     
         res.json({
             ok: true,
