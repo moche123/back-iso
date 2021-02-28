@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const MedicoSchema = Schema({
+const PublicacionSchema = Schema({
     nombre: {
         type: String,
         required: true
@@ -22,11 +22,11 @@ const MedicoSchema = Schema({
 });
 
 
-MedicoSchema.method('toJSON', function() {
+PublicacionSchema.method('toJSON', function() {
     const { __v, ...object } = this.toObject();
     return object;
 })
 
 
 
-module.exports = model( 'Medico', MedicoSchema );
+module.exports = model( 'Publicacion', PublicacionSchema );

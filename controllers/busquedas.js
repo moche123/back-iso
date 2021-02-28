@@ -1,7 +1,7 @@
 const { response } = require('express');
 
 const Usuario = require('../models/usuario');
-const Medico = require('../models/medico');
+const Publicacion = require('../models/publicacion');
 const Tema = require('../models/tema');
 
 
@@ -10,16 +10,16 @@ const getTodo = async(req, res = response ) => {
     const busqueda = req.params.busqueda;
     const regex = new RegExp( busqueda, 'i' );
 
-    const [ usuarios, medicos, temas ] = await Promise.all([
+    const [ usuarios, publicaciones, temas ] = await Promise.all([
         Usuario.find({ nombre: regex }),
-        Medico.find({ nombre: regex }),
+        Publicacion.find({ nombre: regex }),
         Tema.find({ nombre: regex }),
     ]);
 
     res.json({
         ok: true,
         usuarios,
-        medicos,
+        publicaciones,
         temas
     })
 
@@ -34,8 +34,8 @@ const getDocumentosColeccion = async(req, res = response ) => {
     let data = [];
 
     switch ( tabla ) {
-        case 'medicos':
-            data = await Medico.find({ nombre: regex })
+        case 'publicaciones':
+            data = await Publicacion.find({ nombre: regex })
                                 .populate('usuario', 'nombre img')
                                 .populate('tema', 'nombre img');
         break;
@@ -53,7 +53,7 @@ const getDocumentosColeccion = async(req, res = response ) => {
         default:
             return res.status(400).json({
                 ok: false,
-                msg: 'La tabla tiene que ser usuarios/medicos/temas'
+                msg: 'La tabla tiene que ser usuarios/publicaciones/temas'
             });
     }
     

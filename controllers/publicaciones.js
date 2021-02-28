@@ -1,32 +1,32 @@
 const { response } = require('express');
 
-const Medico = require('../models/medico');
+const Publicacion = require('../models/publicacion');
 
-const getMedicos = async(req, res = response) => {
+const getPublicaciones = async(req, res = response) => {
 
-    const medicos = await Medico.find()
+    const publicaciones = await Publicacion.find()
                                 .populate('usuario','nombre img')
                                 .populate('tema','nombre img')
 
 
     res.json({
         ok: true,
-        medicos
+        publicaciones
     })
 }
 
-const getMedicoById = async(req, res = response) => {
+const getPublicacionById = async(req, res = response) => {
 
     const id = req.params.id;
 
     try {
-        const medico = await Medico.findById(id)
+        const publicacion = await Publicacion.findById(id)
                                     .populate('usuario','nombre img')
                                     .populate('tema','nombre img');
     
         res.json({
             ok: true,
-            medico
+            publicacion
         })
         
     } catch (error) {
@@ -38,10 +38,10 @@ const getMedicoById = async(req, res = response) => {
     }
 }
 
-const crearMedico = async (req, res = response) => {
+const crearPublicacion = async (req, res = response) => {
 
     const uid = req.uid;
-    const medico = new Medico({
+    const publicacion = new Publicacion({
         usuario: uid,
         ...req.body
     });
@@ -49,12 +49,12 @@ const crearMedico = async (req, res = response) => {
 
     try {
 
-        const medicoDB = await medico.save();
+        const publicacionDB = await publicacion.save();
 
         
         res.json({
             ok: true,
-            medico: medicoDB
+            publicacion: publicacionDB
         })
 
     } catch (error) {
@@ -68,33 +68,33 @@ const crearMedico = async (req, res = response) => {
 
 }
 
-const actualizarMedico = async(req, res = response) => {
+const actualizarPublicacion = async(req, res = response) => {
     
     const id  = req.params.id;
     const uid = req.uid;
 
     try {
         
-        const medico = await Medico.findById( id );
+        const publicacion = await Publicacion.findById( id );
 
-        if ( !medico ) {
+        if ( !publicacion ) {
             return res.status(404).json({
                 ok: true,
-                msg: 'Medico no encontrado por id',
+                msg: 'Publicacion no encontrado por id',
             });
         }
 
-        const cambiosMedico = {
+        const cambiosPublicacion = {
             ...req.body,
             usuario: uid
         }
 
-        const medicoActualizado = await Medico.findByIdAndUpdate( id, cambiosMedico, { new: true } );
+        const publicacionActualizado = await Publicacion.findByIdAndUpdate( id, cambiosPublicacion, { new: true } );
 
 
         res.json({
             ok: true,
-            medico: medicoActualizado
+            publicacion: publicacionActualizado
         })
 
     } catch (error) {
@@ -109,26 +109,26 @@ const actualizarMedico = async(req, res = response) => {
 
 }
 
-const borrarMedico = async (req, res = response) => {
+const borrarPublicacion = async (req, res = response) => {
    
     const id  = req.params.id;
 
     try {
         
-        const medico = await Medico.findById( id );
+        const publicacion = await Publicacion.findById( id );
 
-        if ( !medico ) {
+        if ( !publicacion ) {
             return res.status(404).json({
                 ok: true,
-                msg: 'Medico no encontrado por id',
+                msg: 'Publicacion no encontrado por id',
             });
         }
 
-        await Medico.findByIdAndDelete( id );
+        await Publicacion.findByIdAndDelete( id );
 
         res.json({
             ok: true,
-            msg: 'Médico borrado'
+            msg: 'Publicación borrada'
         }); 
 
     } catch (error) {
@@ -146,9 +146,9 @@ const borrarMedico = async (req, res = response) => {
 
 
 module.exports = {
-    getMedicos,
-    crearMedico,
-    actualizarMedico,
-    borrarMedico,
-    getMedicoById
+    getPublicaciones,
+    crearPublicacion,
+    actualizarPublicacion,
+    borrarPublicacion,
+    getPublicacionById
 }

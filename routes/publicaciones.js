@@ -1,6 +1,6 @@
 /*
-    Medicos
-    ruta: '/api/medico'
+    Publicaciones
+    ruta: '/api/publicacion'
 */
 const { Router } = require('express');
 const { check } = require('express-validator');
@@ -9,17 +9,17 @@ const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
 const {
-    getMedicos,
-    crearMedico,
-    actualizarMedico,
-    borrarMedico,
-    getMedicoById
-} = require('../controllers/medicos')
+    getPublicaciones,
+    crearPublicacion,
+    actualizarPublicacion,
+    borrarPublicacion,
+    getPublicacionById
+} = require('../controllers/publicaciones')
 
 
 const router = Router();
 
-router.get( '/', validarJWT, getMedicos );
+router.get( '/', validarJWT, getPublicaciones );
 
 router.post( '/',
     [
@@ -28,7 +28,7 @@ router.post( '/',
         check('tema','El tema id debe de ser válido').isMongoId(),
         validarCampos
     ], 
-    crearMedico 
+    crearPublicacion 
 );
 
 router.put( '/:id',
@@ -38,17 +38,17 @@ router.put( '/:id',
         check('tema','El tema id debe de ser válido').isMongoId(),
         validarCampos
     ],
-    actualizarMedico
+    actualizarPublicacion
 );
 
 router.delete( '/:id',
     validarJWT,
-    borrarMedico
+    borrarPublicacion
 );
 
 router.get( '/:id',
     validarJWT,
-    getMedicoById
+    getPublicacionById
 );
 
 
