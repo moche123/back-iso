@@ -18,7 +18,10 @@ const PublicacionSchema = Schema({
         ref: 'Tema',
         required: true
     },
-    
+    contenido: {
+        type: String,
+        required:true
+    }
 });
 
 
