@@ -24,7 +24,7 @@ router.get( '/', validarJWT, getPublicaciones );
 router.post( '/',
     [
         validarJWT,
-        check('nombre','El nombre del médico es necesario').not().isEmpty(),
+        check('nombre','El nombre la publicación es necesario').not().isEmpty(),
         check('tema','El tema id debe de ser válido').isMongoId(),
         validarCampos
     ], 

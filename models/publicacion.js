@@ -21,6 +21,10 @@ const PublicacionSchema = Schema({
     contenido: {
         type: String,
         required:true
+    },
+    articulo: {
+        type: String,
+        
     }
 });
 

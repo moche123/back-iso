@@ -24,7 +24,7 @@ const actualizarImagen = async(tipo, id, nombreArchivo) => {
                 return false;
             }
 
-            pathViejo = `./uploads/publicacione/${ publicacion.img }`;
+            pathViejo = `./uploads/publicaciones/${ publicacion.img }`;
             borrarImagen( pathViejo );
 
             publicacion.img = nombreArchivo;
