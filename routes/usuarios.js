@@ -35,6 +35,7 @@ router.put( '/:id',
         check('nombre', 'El nombre es obligatorio').not().isEmpty(),
         check('email', 'El email es obligatorio').isEmail(),
         check('role', 'El role es obligatorio').not().isEmpty(),
+        check('escuela','La escuela es obligatoria').not().isEmpty(),
         validarCampos,
     ],
     actualizarUsuario

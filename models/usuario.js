@@ -27,6 +27,9 @@ const UsuarioSchema = Schema({
         type: Boolean,
         default: false
     },
+    escuela: {
+        type: String,
+    }
 });
 
 
