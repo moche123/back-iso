@@ -13,7 +13,9 @@ const {
     crearPublicacion,
     actualizarPublicacion,
     borrarPublicacion,
-    getPublicacionById
+    getPublicacionById,
+    getPubilcationbyStudentCarear,
+    getPublicationByTema
 } = require('../controllers/publicaciones')
 
 
@@ -50,8 +52,14 @@ router.get( '/:id',
     validarJWT,
     getPublicacionById
 );
+router.get('/carrera/:carear',
 
-
+    //validarJWT,
+    getPubilcationbyStudentCarear
+);
+router.get('/tema/:tema',
+    getPublicationByTema
+);
 
 module.exports = router;
 

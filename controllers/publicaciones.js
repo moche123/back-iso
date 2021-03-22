@@ -37,6 +37,46 @@ const getPublicacionById = async(req, res = response) => {
         })
     }
 }
+const getPubilcationbyStudentCarear = async (req,res=response) => {
+    const carearI = req.params.carear
+    
+    try{
+        const resultadoParcial = await Publicacion.find({}).populate('usuario')
+        const resultado = await resultadoParcial.filter(elemento => elemento.usuario.escuela == carearI)
+        console.log('Para '+carearI,": "+resultado)
+        res.json({
+            ok: true,
+            resultado
+        })
+    }catch(error){
+        console.log(error);
+        res.json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        })
+    }
+    
+}
+
+const getPublicationByTema = async(req,res=response)=>{
+    const temaI = req.params.tema;
+
+    try{
+        const resultadoParcial = await Publicacion.find({}).populate('tema')
+        const resultado = await resultadoParcial.filter(elemento => elemento.tema.nombre == temaI)       
+        
+        res.json({
+            ok: true,
+            resultado
+        })
+    }catch(error){
+        console.log(error);
+        res.json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        })
+    }
+}
 
 const crearPublicacion = async (req, res = response) => {
 
@@ -150,5 +190,7 @@ module.exports = {
     crearPublicacion,
     actualizarPublicacion,
     borrarPublicacion,
-    getPublicacionById
+    getPublicacionById,
+    getPubilcationbyStudentCarear,
+    getPublicationByTema
 }
