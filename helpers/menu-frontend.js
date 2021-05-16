@@ -8,9 +8,9 @@ const getMenuFrontEnd = (role = 'USER_ROLE') => {
           submenu: [
             { titulo: 'Main', url: '/' },
             { titulo: 'Gráficas', url: 'grafica1' },
-            { titulo: 'rxjs', url: 'rxjs' },
+           /*  { titulo: 'rxjs', url: 'rxjs' },
             { titulo: 'Promesas', url: 'promesas' },
-            { titulo: 'ProgressBar', url: 'progress' },
+            { titulo: 'ProgressBar', url: 'progress' }, */
           ]
         },
     
@@ -27,6 +27,7 @@ const getMenuFrontEnd = (role = 'USER_ROLE') => {
 
     if ( role === 'ADMIN_ROLE' ) {
         menu[1].submenu.unshift({ titulo: 'Usuarios', url: 'usuarios' })
+        menu[1].submenu.unshift({ titulo: 'Lista Articulos Aprobados', url: 'articulosaprobados' })
     }
 
     return menu;

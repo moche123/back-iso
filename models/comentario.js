@@ -1,30 +1,25 @@
 const { Schema, model } = require('mongoose');
 
-const TemaSchema = Schema({
-    nombre: {
+
+const ComentarioSchema = Schema({
+    contenido: {
         type: String,
         required: true
-    },
-    img: {
-        type: String,
     },
     usuario: {
         required: true,
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
     },
-    habilitado:{
-        type: Boolean,
-        default: true
-    }
-}, {  collection: 'temas' });
+
+});
 
 
-TemaSchema.method('toJSON', function() {
+ComentarioSchema.method('toJSON', function() {
     const { __v, ...object } = this.toObject();
     return object;
 })
 
 
 
-module.exports = model( 'Tema', TemaSchema );
+module.exports = model( 'Comentario', ComentarioSchema );

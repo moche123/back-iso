@@ -29,7 +29,9 @@ app.use( '/api/publicaciones', require('./routes/publicaciones') );
 app.use( '/api/todo', require('./routes/busquedas') );
 app.use( '/api/login', require('./routes/auth') );
 app.use( '/api/upload', require('./routes/uploads') );
-app.use( '/api/escuelas', require('./routes/escuelas') )
+app.use( '/api/escuelas', require('./routes/escuelas') );
+app.use( '/api/articulosaprobados', require('./routes/articulosaprobados') );
+app.use( '/api/comentarios', require('./routes/comentarios') );
 // Lo último
 app.get('*', (req, res) => {
     res.sendFile( path.resolve( __dirname, 'public/index.html' ) );

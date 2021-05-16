@@ -57,12 +57,13 @@ const login = async( req, res = response ) => {
 const googleSignIn = async( req, res = response ) => {
 
     const googleToken = req.body.token;
-
+    
     try {
-
+        
         const { name, email, picture } = await googleVerify( googleToken );
 
         const usuarioDB = await Usuario.findOne({ email });
+        
         let usuario;
 
         if ( !usuarioDB ) {
@@ -77,6 +78,7 @@ const googleSignIn = async( req, res = response ) => {
         } else {
             // existe usuario
             usuario = usuarioDB;
+           
             usuario.google = true;
         }
 

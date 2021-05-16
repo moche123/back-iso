@@ -150,12 +150,13 @@ const borrarUsuario = async(req, res = response ) => {
             });
         }
 
-        await Usuario.findByIdAndDelete( uid );
-
+        //await Usuario.findByIdAndDelete( uid );
+        const usuarioActualizado = await Usuario.findByIdAndUpdate( uid, {habilitado:false}, { new: true } );
         
         res.json({
             ok: true,
-            msg: 'Usuario eliminado'
+            msg: 'Usuario eliminado',
+            usuario: usuarioActualizado
         });
 
     } catch (error) {

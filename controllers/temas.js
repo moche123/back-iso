@@ -6,7 +6,7 @@ const Tema = require('../models/tema');
 const getTemas = async(req, res = response) => {
 
     const temas = await Tema.find()
-                                    .populate('usuario','nombre img');
+                                    .populate('usuario','nombre img role');
 
     res.json({
         ok: true,
@@ -101,12 +101,13 @@ const borrarTema = async(req, res = response) => {
             });
         }
 
-        await Tema.findByIdAndDelete( id );
-
+        //await Tema.findByIdAndDelete( id );
+        const temaActualizado = await Tema.findByIdAndUpdate( id, {habilitado:false}, { new: true } );
 
         res.json({
             ok: true,
-            msg: 'Tema eliminado'
+            msg: 'Tema eliminado',
+            tema: temaActualizado
         });
 
     } catch (error) {

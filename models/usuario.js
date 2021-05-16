@@ -29,6 +29,10 @@ const UsuarioSchema = Schema({
     },
     escuela: {
         type: String,
+    },
+    habilitado:{
+        type: Boolean,
+        default: true
     }
 });
 
@@ -38,7 +42,5 @@ UsuarioSchema.method('toJSON', function() {
     object.uid = _id;
     return object;
 })
-
-
 
 module.exports = model( 'Usuario', UsuarioSchema );

@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-
 const PublicacionSchema = Schema({
     nombre: {
         type: String,
@@ -25,15 +24,20 @@ const PublicacionSchema = Schema({
     articulo: {
         type: String,
         
-    }
+    },
+    caa: {
+        type: String,
+        required:true
+    },
+    habilitado:{
+        type: Boolean,
+        default: true
+    },
 });
-
 
 PublicacionSchema.method('toJSON', function() {
     const { __v, ...object } = this.toObject();
     return object;
 })
-
-
 
 module.exports = model( 'Publicacion', PublicacionSchema );

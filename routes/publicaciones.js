@@ -15,7 +15,8 @@ const {
     borrarPublicacion,
     getPublicacionById,
     getPubilcationbyStudentCarear,
-    getPublicationByTema
+    getPublicationByTema,
+    buscarArticuloAprobado
 } = require('../controllers/publicaciones')
 
 
@@ -59,6 +60,9 @@ router.get('/carrera/:carear',
 );
 router.get('/tema/:tema',
     getPublicationByTema
+);
+router.get('/articuloaprobadoid/:palabra',
+    buscarArticuloAprobado
 );
 
 module.exports = router;

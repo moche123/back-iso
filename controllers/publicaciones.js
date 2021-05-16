@@ -1,11 +1,13 @@
 const { response } = require('express');
 
 const Publicacion = require('../models/publicacion');
+const ArticuloAprobado = require('../models/articuloaprobado'); 
+
 
 const getPublicaciones = async(req, res = response) => {
 
     const publicaciones = await Publicacion.find()
-                                .populate('usuario','nombre img')
+                                .populate('usuario','nombre email img role')
                                 .populate('tema','nombre img')
 
 
@@ -21,7 +23,7 @@ const getPublicacionById = async(req, res = response) => {
 
     try {
         const publicacion = await Publicacion.findById(id)
-                                    .populate('usuario','nombre img')
+                                    .populate('usuario','nombre email img role')
                                     .populate('tema','nombre img');
     
         res.json({
@@ -85,17 +87,21 @@ const crearPublicacion = async (req, res = response) => {
         usuario: uid,
         ...req.body
     });
-
+    /* console.log(publicacion) */
 
     try {
 
         const publicacionDB = await publicacion.save();
 
-        
+        await ArticuloAprobado.findByIdAndUpdate(publicacionDB.caa,{publicado:true},{new:true});
+
+
         res.json({
             ok: true,
             publicacion: publicacionDB
         })
+
+
 
     } catch (error) {
         console.log(error);
@@ -164,11 +170,14 @@ const borrarPublicacion = async (req, res = response) => {
             });
         }
 
-        await Publicacion.findByIdAndDelete( id );
+        //await Publicacion.findByIdAndDelete( id );
+        const publicacionActualizado = await Publicacion.findByIdAndUpdate( id,{habilitado:false}, { new: true } );
 
+    
         res.json({
             ok: true,
-            msg: 'Publicación borrada'
+            msg: 'Publicación borrada',
+            publicacion:publicacionActualizado
         }); 
 
     } catch (error) {
@@ -182,6 +191,26 @@ const borrarPublicacion = async (req, res = response) => {
     }
 
 }
+const buscarArticuloAprobado = async ( req,res=response ) => {
+    const palabra = req.params.palabra;
+    try{
+        const articuloapropiado = await ArticuloAprobado.findById(palabra);
+
+        res.json({
+            ok: true,
+            articulo:articuloapropiado
+        })
+    } catch (error) {
+
+        //console.log(error);
+
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        })
+    }
+    
+}
 
 
 
@@ -192,5 +221,6 @@ module.exports = {
     borrarPublicacion,
     getPublicacionById,
     getPubilcationbyStudentCarear,
-    getPublicationByTema
+    getPublicationByTema,
+    buscarArticuloAprobado
 }

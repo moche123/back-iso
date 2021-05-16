@@ -3,6 +3,7 @@ const { response } = require('express');
 const Usuario = require('../models/usuario');
 const Publicacion = require('../models/publicacion');
 const Tema = require('../models/tema');
+const ArticuloAprobado = require('../models/articuloaprobado');
 
 
 const getTodo = async(req, res = response ) => {
@@ -47,6 +48,11 @@ const getDocumentosColeccion = async(req, res = response ) => {
 
         case 'usuarios':
             data = await Usuario.find({ nombre: regex });
+            
+        break;
+
+        case 'publicacionesaprobadas':
+            data = await ArticuloAprobado.find({ nombre: regex });
             
         break;
     
