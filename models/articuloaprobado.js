@@ -3,7 +3,8 @@ const { Schema, model } = require('mongoose');
 const ArticuloAprobadoSchema = Schema({
     nombre: {
         type: String,
-        required: true
+        required: true,
+        unique:true
     },
     publicado: {
         type: Boolean,

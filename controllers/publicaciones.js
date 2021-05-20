@@ -193,9 +193,11 @@ const borrarPublicacion = async (req, res = response) => {
 }
 const buscarArticuloAprobado = async ( req,res=response ) => {
     const palabra = req.params.palabra;
+    const regex = new RegExp( palabra, 'i' );
     try{
-        const articuloapropiado = await ArticuloAprobado.findById(palabra);
-
+        //console.log(await ArticuloAprobado.find({}));
+        const articuloapropiado = await ArticuloAprobado.find({nombre:palabra});
+        
         res.json({
             ok: true,
             articulo:articuloapropiado
