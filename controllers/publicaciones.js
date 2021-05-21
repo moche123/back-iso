@@ -93,7 +93,7 @@ const crearPublicacion = async (req, res = response) => {
 
         const publicacionDB = await publicacion.save();
 
-        await ArticuloAprobado.findByIdAndUpdate(publicacionDB.caa,{publicado:true},{new:true});
+        await ArticuloAprobado.findOneAndUpdate({nombre:publicacionDB.caa},{publicado:true},{new:true});
 
 
         res.json({
