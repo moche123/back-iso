@@ -37,13 +37,13 @@ const getDocumentosColeccion = async(req, res = response ) => {
     switch ( tabla ) {
         case 'publicaciones':
             data = await Publicacion.find({ nombre: regex })
-                                .populate('usuario', 'nombre img')
-                                .populate('tema', 'nombre img');
+                                .populate('usuario', 'nombre img habilitado')
+                                .populate('tema', 'nombre img habilitado');
         break;
 
         case 'temas':
             data = await Tema.find({ nombre: regex })
-                                    .populate('usuario', 'nombre img');
+                                    .populate('usuario', 'nombre img habilitado');
         break;
 
         case 'usuarios':
