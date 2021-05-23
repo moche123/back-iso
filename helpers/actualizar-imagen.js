@@ -20,7 +20,7 @@ const actualizarImagen = async(tipo, id, nombreArchivo) => {
         case 'publicaciones':
             const publicacion = await Publicacion.findById(id);
             if ( !publicacion ) {
-                console.log('No es un médico por id');
+                console.log('No es una publicacion por id');
                 return false;
             }
 
