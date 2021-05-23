@@ -27,6 +27,14 @@ const getPublicacionById = async(req, res = response) => {
                                     .populate('usuario','nombre email img role habilitado')
                                     .populate('tema','nombre img habilitado');
     
+        const articulo = await ArticuloAprobado.find({nombre:publicacion.articulo});
+        if(articulo.habilitado == false){
+            res.json({
+                ok: true,
+                mensaje:"Articulo eliminado"
+            })
+            
+        }
         res.json({
             ok: true,
             publicacion
