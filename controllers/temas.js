@@ -6,7 +6,7 @@ const Tema = require('../models/tema');
 const getTemas = async(req, res = response) => {
 
     const temas = await Tema.find()
-                                    .populate('usuario','nombre img role');
+                                    .populate('usuario','nombre img role habilitado');
 
     res.json({
         ok: true,
