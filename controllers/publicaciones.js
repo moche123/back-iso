@@ -65,7 +65,7 @@ const getPublicationByTema = async(req,res=response)=>{
     const temaI = req.params.tema;
 
     try{
-        const resultadoParcial = await Publicacion.find({}).populate('tema')
+        const resultadoParcial = await Publicacion.find({}).populate('tema').populate('usuario')
         const resultado = await resultadoParcial.filter(elemento => elemento.tema.nombre == temaI)       
         
         res.json({
