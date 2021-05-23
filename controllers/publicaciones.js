@@ -7,8 +7,9 @@ const ArticuloAprobado = require('../models/articuloaprobado');
 const getPublicaciones = async(req, res = response) => {
 
     const publicaciones = await Publicacion.find()
-                                .populate('usuario','nombre email img role')
-                                .populate('tema','nombre img')
+                                .populate('usuario','nombre email img role habilitado')
+                                .populate('tema','nombre img habilitado')
+                                .populate('articuloaprobado','nombre publicado habilitado')
 
 
     res.json({
@@ -23,8 +24,8 @@ const getPublicacionById = async(req, res = response) => {
 
     try {
         const publicacion = await Publicacion.findById(id)
-                                    .populate('usuario','nombre email img role')
-                                    .populate('tema','nombre img');
+                                    .populate('usuario','nombre email img role habilitado')
+                                    .populate('tema','nombre img habilitado');
     
         res.json({
             ok: true,
