@@ -51,7 +51,7 @@ const getPubilcationbyStudentCarear = async (req,res=response) => {
     try{
         const resultadoParcial = await Publicacion.find({}).populate('usuario').populate('tema')
         const resultado = await resultadoParcial.filter(elemento => elemento.usuario.escuela == carearI
-            && elemento.usuario.habilitado && elemento.tema.habilitado == true)
+            && elemento.usuario.habilitado && elemento.tema.habilitado == true && elemento.habilitado)
         //console.log('Para '+carearI,": "+resultado)
         res.json({
             ok: true,
