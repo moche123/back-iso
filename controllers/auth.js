@@ -79,7 +79,7 @@ const googleSignIn = async( req, res = response ) => {
         } else {
             // existe usuario
             usuario = usuarioDB;
-           
+            habilitado:true,
             usuario.google = true;
         }
 
