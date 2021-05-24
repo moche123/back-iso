@@ -14,7 +14,7 @@ const getPublicaciones = async(req, res = response) => {
         let articulo = await ArticuloAprobado.find({nombre:publicacion.articulo});
         publicacion.artic = articulo;
     })
-
+    console.log("publicaciones: "+publicaciones)
     res.json({
         ok: true,
         publicaciones
