@@ -5,12 +5,15 @@ const ArticuloAprobado = require('../models/articuloaprobado');
 
 
 const getPublicaciones = async(req, res = response) => {
-
+    
     const publicaciones = await Publicacion.find()
                                 .populate('usuario','nombre email img role habilitado')
                                 .populate('tema','nombre img habilitado')
                                 
-
+    publicaciones.forEach(publicacion=>{
+        let articulo = await ArticuloAprobado.find({nombre:publicacion.articulo});
+        publicacion.artic = articulo;
+    })
 
     res.json({
         ok: true,
@@ -27,14 +30,14 @@ const getPublicacionById = async(req, res = response) => {
                                     .populate('usuario','nombre email img role habilitado')
                                     .populate('tema','nombre img habilitado');
     
-        const articulo = await ArticuloAprobado.find({nombre:publicacion.articulo});
+  /*       const articulo = await ArticuloAprobado.find({nombre:publicacion.articulo});
         if(articulo.habilitado == false){
             res.json({
                 ok: true,
                 mensaje:"Articulo eliminado"
             })
             
-        }
+        } */
         res.json({
             ok: true,
             publicacion
