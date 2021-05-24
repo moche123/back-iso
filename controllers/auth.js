@@ -73,6 +73,7 @@ const googleSignIn = async( req, res = response ) => {
                 email,
                 password: '@@@',
                 img: picture,
+                habilitado:true,
                 google: true
             });
         } else {
