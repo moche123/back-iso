@@ -9,21 +9,10 @@ const getPublicaciones = async(req, res = response) => {
     const publicaciones = await Publicacion.find()
                                 .populate('usuario','nombre email img role habilitado')
                                 .populate('tema','nombre img habilitado')
-                                
-    publicaciones.forEach(async publicacion=>{
-        let articulo =  await ArticuloAprobado.find({nombre:publicacion.caa});
-        publicacion.artic = articulo;
-        i=i+1;
-        if(i == publicaciones.length){
-            console.log(publicaciones)
-            res.json({
-                ok: true,
-                publicaciones
-            })
-        }
-    })
-   
-    
+    res.json({
+        ok: true,
+        publicaciones
+    })    
 }
 
 const getPublicacionById = async(req, res = response) => {
@@ -63,7 +52,7 @@ const getPubilcationbyStudentCarear = async (req,res=response) => {
         const resultadoParcial = await Publicacion.find({}).populate('usuario').populate('tema')
         const resultado = await resultadoParcial.filter(elemento => elemento.usuario.escuela == carearI
             && elemento.usuario.habilitado && elemento.tema.habilitado == true)
-        console.log('Para '+carearI,": "+resultado)
+        //console.log('Para '+carearI,": "+resultado)
         res.json({
             ok: true,
             resultado
