@@ -16,3 +16,5 @@ uploads/medicos/**.png
 uploads/medicos/**.gif
 
 fileuploads/publicaciones/**.pdf
+
+.env
