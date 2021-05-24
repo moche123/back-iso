@@ -10,7 +10,7 @@ const getPublicaciones = async(req, res = response) => {
                                 .populate('usuario','nombre email img role habilitado')
                                 .populate('tema','nombre img habilitado')
                                 
-    publicaciones.forEach(publicacion=>{
+    publicaciones.forEach(async publicacion=>{
         let articulo = await ArticuloAprobado.find({nombre:publicacion.articulo});
         publicacion.artic = articulo;
     })
