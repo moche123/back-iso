@@ -5,20 +5,25 @@ const ArticuloAprobado = require('../models/articuloaprobado');
 
 
 const getPublicaciones = async(req, res = response) => {
-    
+    let i=0;
     const publicaciones = await Publicacion.find()
                                 .populate('usuario','nombre email img role habilitado')
                                 .populate('tema','nombre img habilitado')
                                 
-    publicaciones = publicaciones.forEach(async publicacion=>{
-        let articulo = await ArticuloAprobado.find({nombre:publicacion.articulo});
+    publicaciones.forEach(publicacion=>{
+        let articulo =  ArticuloAprobado.find({nombre:publicacion.articulo});
         publicacion.artic = articulo;
+        i=i+1;
+        if(i == publicaciones.length){
+            console.log(publicaciones)
+            res.json({
+                ok: true,
+                publicaciones
+            })
+        }
     })
-    console.log("publicaciones: "+publicaciones)
-    res.json({
-        ok: true,
-        publicaciones
-    })
+   
+    
 }
 
 const getPublicacionById = async(req, res = response) => {
