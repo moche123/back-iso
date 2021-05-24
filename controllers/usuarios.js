@@ -48,7 +48,7 @@ const crearUsuario = async(req, res = response) => {
         const salt = bcrypt.genSaltSync();
         usuario.password = bcrypt.hashSync( password, salt );
         usuario.habilitado = true;
-    
+        console.log(usuario)
         // Guardar usuario
         await usuario.save();
 
